@@ -47,31 +47,34 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   );
                 case Orientation.landscape:
-                  return const Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Expanded(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Center(child: SingleChildScrollView(child: _LoginHeaderView())),
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: FractionallySizedBox(
-                                widthFactor: 0.8,
-                                child: Center(
-                                  child: SingleChildScrollView(child: _LoginFormView()),
+                  return SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        SizedBox(
+                          height: 70.sHeight,
+                          child: const Row(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Center(child: _LoginHeaderView()),
+                              ),
+                              Expanded(
+                                flex: 3,
+                                child: FractionallySizedBox(
+                                  widthFactor: 0.8,
+                                  child: Center(
+                                    child: _LoginFormView(),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      _AssistanceContactDetailsWidget(),
-                    ],
+                        const _AssistanceContactDetailsWidget(),
+                      ],
+                    ),
                   );
               }
             }),
@@ -118,10 +121,9 @@ class _VersionInfoWidget extends StatelessWidget {
 }
 
 class _RichTextView extends StatelessWidget {
-  const _RichTextView({required this.textOne, required this.textTwo, this.textAlign = TextAlign.start});
+  const _RichTextView({required this.textOne, required this.textTwo});
   final String textOne;
   final String textTwo;
-  final TextAlign textAlign;
   @override
   Widget build(BuildContext context) {
     return Text.rich(
@@ -135,7 +137,6 @@ class _RichTextView extends StatelessWidget {
               ))
         ],
       ),
-      textAlign: textAlign,
     );
   }
 }
