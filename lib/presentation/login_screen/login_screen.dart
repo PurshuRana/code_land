@@ -1,14 +1,18 @@
 //Author: Purushotham
 //Created On: 04-04-2024
 
+import 'dart:ui';
 
 import 'package:code_land/constants/ui_constants.dart';
 import 'package:code_land/presentation/image_upload/image_upload_screen.dart';
 import 'package:code_land/presentation/widgets/code_land_logo_widget.dart';
 import 'package:code_land/presentation/widgets/screen_padding.dart';
 import 'package:code_land/utils/extensions/build_context_extensions.dart';
+import 'package:code_land/utils/extensions/extensions.dart';
 import 'package:code_land/utils/mixins/validations_mixin.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 part 'widgets/login_form.dart';
 part 'widgets/login_header.dart';
@@ -26,61 +30,55 @@ class _LoginScreenState extends State<LoginScreen> {
     return PopScope(
       canPop: false,
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
-          body: SafeArea(
-        child: ScreenPadding.horizontal(
-          child: OrientationBuilder(builder: (context, orientation) {
-            switch (orientation) {
-              case Orientation.portrait:
-                return const Column(
-                  children: [
-                    Expanded(flex: 6, child: _LoginHeaderView()),
-                    _LoginFormView(),
-                    Spacer(flex: 1),
-                    Expanded(flex: 3, child: _AssistanceContactDetailsWidget()),
-                    Expanded(flex: 1, child: _VersionInfoWidget()),
-                  ],
-                );
-              case Orientation.landscape:
-                return const Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                      child: Row(
-                        children: [
-                          Expanded(flex: 2, child: _LoginHeaderView()),
-                          Expanded(
-                            flex: 3,
-                            child: FractionallySizedBox(
-                              widthFactor: 0.8,
-                              child: Center(
-                                child: _LoginFormView(),
+        resizeToAvoidBottomInset: true,
+        body: SafeArea(
+          child: ScreenPadding.horizontal(
+            child: OrientationBuilder(builder: (context, orientation) {
+              switch (orientation) {
+                case Orientation.portrait:
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 36.sHeight, child: const _LoginHeaderView()),
+                        const _LoginFormView(),
+                        5.sHeight.vSpace,
+                        const _AssistanceContactDetailsWidget(),
+                      ],
+                    ),
+                  );
+                case Orientation.landscape:
+                  return const Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Center(child: SingleChildScrollView(child: _LoginHeaderView())),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: FractionallySizedBox(
+                                widthFactor: 0.8,
+                                child: Center(
+                                  child: SingleChildScrollView(child: _LoginFormView()),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      width: 0,
-                      height: 20,
-                    ),
-                    _AssistanceContactDetailsWidget(),
-                    SizedBox(
-                      width: 0,
-                      height: 10,
-                    ),
-                    _VersionInfoWidget(),
-                    SizedBox(
-                      width: 0,
-                      height: 10,
-                    ),
-                  ],
-                );
-            }
-          }),
+                      _AssistanceContactDetailsWidget(),
+                    ],
+                  );
+              }
+            }),
+          ),
         ),
-      )),
+        bottomNavigationBar: const _VersionInfoWidget(),
+      ),
     );
   }
 }
@@ -109,7 +107,13 @@ class _VersionInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("v1.7 © 2023, Codeland Infosolutions Pvt Ltd.",textAlign: TextAlign.center,);
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: UiConstants.screenPadding, vertical: UiConstants.screenPadding * (context.orientation == Orientation.portrait ? 2 : 1)),
+      child: const Text(
+        "v1.7 © 2023, Codeland Infosolutions Pvt Ltd.",
+        textAlign: TextAlign.center,
+      ),
+    );
   }
 }
 

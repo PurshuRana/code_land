@@ -11,9 +11,9 @@ extension BuildContextExtensions on BuildContext {
   double get width => MediaQuery.of(this).size.width;
   Orientation get orientation => MediaQuery.of(this).orientation;
 
-  double  percentScreenWidth(int percent) => width * percent / 100;
+  double  percentScreenWidth(int percent) =>  orientation == Orientation.portrait ? width * percent / 100 : height * percent / 100;
 
-  double percentScreenHeight(int percent) => height * percent / 100;
+  double percentScreenHeight(int percent) => orientation == Orientation.portrait ? height * percent / 100 : width * percent / 100;
 
 
 

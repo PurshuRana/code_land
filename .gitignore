@@ -708,3 +708,5 @@
 /.flutter-plugins
 /.flutter-plugins-dependencies
 /.metadata
+/.dart_tool
+/build

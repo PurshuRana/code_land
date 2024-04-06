@@ -38,6 +38,7 @@ class _LoginFormViewState extends State<_LoginFormView> with ValidationsMixin {
                 validator: validateLoginUserName,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 onTapOutside: (event) => context.removePrimaryFocus(),
+                textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(
                   labelText: "Username",
                 ),

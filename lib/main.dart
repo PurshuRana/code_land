@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 //Author: Purushotham
 //Created On: 04-04-2024
 
-
+final navigatorKey = GlobalKey<NavigatorState>();
 void main() {
   runApp(const CodeLandApp());
 }
@@ -17,6 +17,7 @@ class CodeLandApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      navigatorKey: navigatorKey,
       theme: ThemeData(
         useMaterial3: false,
           primaryColor: ColorConstants.primaryColor,
